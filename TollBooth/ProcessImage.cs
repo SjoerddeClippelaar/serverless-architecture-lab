@@ -7,19 +7,16 @@
 // Use for local testing:
 //   https://{ID}.ngrok.io/runtime/webhooks/EventGrid?functionName=ProcessImage
 
+using Microsoft.Azure.EventGrid.Models;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.EventGrid;
+using Microsoft.Extensions.Logging;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Net.Http;
-using System.Net.Mime;
 using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Azure.EventGrid.Models;
-using Microsoft.Azure.WebJobs.Extensions.EventGrid;
-using Microsoft.Extensions.Logging;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
-using Newtonsoft.Json.Linq;
 using TollBooth.Models;
 
 namespace TollBooth
@@ -35,7 +32,7 @@ namespace TollBooth
         }
 
         [FunctionName("ProcessImage")]
-        public static async Task Run([EventGridTrigger]EventGridEvent eventGridEvent,
+        public static async Task Run([EventGridTrigger] EventGridEvent eventGridEvent,
             [Blob(blobPath: "{data.url}", access: FileAccess.Read,
                 Connection = "blobStorageConnection")] Stream incomingPlate,
             ILogger log)

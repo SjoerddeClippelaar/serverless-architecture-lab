@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Extensions.Logging;
 using TollBooth.Models;
 
 namespace TollBooth
@@ -48,7 +44,7 @@ namespace TollBooth
             var key = Environment.GetEnvironmentVariable("eventGridTopicKey");
 
             _log.LogInformation($"Sending license plate data to the {eventType} Event Grid type");
-            
+
             var events = new List<Event<LicensePlateData>>
             {
                 new Event<LicensePlateData>()

@@ -1,22 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Logging;
+using Polly;
+using Polly.CircuitBreaker;
+using Polly.Wrap;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
-using Microsoft.Azure.WebJobs.Host;
-using Microsoft.Extensions.Logging;
 using TollBooth.Models;
-using Polly;
-using Polly.CircuitBreaker;
-using Polly.Wrap;
 
 namespace TollBooth
 {
