@@ -40,9 +40,8 @@ namespace TollBooth
             using (var stream = new MemoryStream())
             {
                 using (var textWriter = new StreamWriter(stream))
-                using (var csv = new CsvWriter(textWriter))
+                using (var csv = new CsvWriter(textWriter, System.Globalization.CultureInfo.CurrentCulture))
                 {
-                    csv.Configuration.Delimiter = ",";
                     csv.WriteRecords(licensePlates.Select(ToLicensePlateData));
                     await textWriter.FlushAsync();
 
